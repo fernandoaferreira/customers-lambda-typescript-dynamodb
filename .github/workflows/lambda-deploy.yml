@@ -17,22 +17,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-          
-      - name: Verificar se as secrets estão configuradas
-        run: |
-          if [ -z "$AWS_ACCESS_KEY_ID" ]; then
-            echo "A secret AWS_ACCESS_KEY_ID não está configurada."
-            exit 1
-          fi
-          if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-            echo "A secret AWS_SECRET_ACCESS_KEY não está configurada."
-            exit 1
-          fi
-
-      - name: Mostrar valores das secrets
-        run: |
-          echo "Valor de AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
-          echo "Valor de AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
 
       - name: Verificar se a AWS CLI já está instalada
         run: |
@@ -54,8 +38,8 @@ jobs:
         run: |
           mkdir -p ~/.aws
           echo "[default]" >> ~/.aws/credentials
-          echo "aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
-          echo "aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
+          echo "aws_access_key_id=${{ vars.AWS_ACCESS_KEY_ID }}" >> ~/.aws/credentials
+          echo "aws_secret_access_key=${{ vars.AWS_SECRET_ACCESS_KEY }}" >> ~/.aws/credentials
           echo "region=us-east-1" >> ~/.aws/config
 
       - name: Mostrar valores das credenciais
