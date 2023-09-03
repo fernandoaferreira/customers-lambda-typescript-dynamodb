@@ -17,10 +17,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
+
       - name: Instalar AWS CLI
-        uses: aws/install-cloud-cli@v1
-        with:
-          aws-version: '2'
+        run: |
+          # Instalação da AWS CLI usando o utilitário padrão do Docker
+          docker run --rm -v $(pwd):/app -w /app amazon/aws-cli aws --version
 
       - name: Instalar dependências
         run: npm install
