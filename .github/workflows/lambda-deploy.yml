@@ -1,4 +1,4 @@
-name: Deploy Lambda Function
+name: Deploy Lambda with Serverless Framework
 
 on:
   push:
@@ -10,22 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Configurar Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
-      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          node-version: "14"
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          node-version: '14'
 
-      - name: Instalar dependências
-        run: npm install
+      - name: Install Serverless Framework
+        run: npm install -g serverless
 
-      - name: Implante a função Lambda
+      - name: Deploy Lambda
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          npm install -g serverless
-          sls deploy
+          cd path/to/serverless/project
+          serverless deploy
