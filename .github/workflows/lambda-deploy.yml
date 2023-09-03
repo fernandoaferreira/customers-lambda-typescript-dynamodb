@@ -20,8 +20,11 @@ jobs:
 
       - name: Instalar AWS CLI
         run: |
-          # Instalação da AWS CLI usando o utilitário padrão do Docker
-          docker run --rm -v $(pwd):/app -w /app amazon/aws-cli aws --version
+          # Instalação da AWS CLI
+          curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          unzip awscliv2.zip
+          sudo ./aws/install
+          aws --version
 
       - name: Instalar dependências
         run: npm install
