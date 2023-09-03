@@ -4,6 +4,7 @@ const ENVS_VARS = {
     PASSWORD_ADMIN: process.env.PASSWORD_ADMIN,
     TABLE_NAME: process.env.TABLE_NAME,
     LIMIT_TIME_CACHE: process.env.LIMIT_TIME_CACHE
+    LIMIT_TIME_CACHE: process.env.TESTE
 }
 
 export default ENVS_VARS;
